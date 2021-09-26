@@ -1,17 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Visitors List
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-card *ngFor="let visitor of visitors;">
+      <ion-row>
+        <ion-col size="5">
+          Name: {{visitor.name}}
+        </ion-col>
+        <ion-col size="5">
+          Date: {{visitor.entryDate.includes('T')?visitor.entryDate.split('T')[0]:visitor.entryDate}}
+        </ion-col>
+        <ion-col size="2" (click)="goto(visitor)">View</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="5">
+          In Time: {{visitor.entryTime.includes('T')?visitor.entryTime.split('T')[1].split('.')[0]:visitor.entryTime}}
+        </ion-col>
+        <ion-col size="5">
+          Out Time: {{visitor.exitTime == null?visitor.exitTime:visitor.exitTime.includes('T')?visitor.exitTime.split('T')[1].split('.')[0]:visitor.exitTime}}
+        </ion-col>
+      </ion-row>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    </ion-card>
+  </ion-grid>
 </ion-content>

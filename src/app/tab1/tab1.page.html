@@ -1,17 +1,110 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Visitor Entry Form
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="visitorForm" class="content-bg" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label position="floating">Full Name</ion-label>
+      <ion-input [(ngModel)]="vf.name" [readonly]="isEdit" formControlName="name" placeholder="Enter Full Name"></ion-input>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.name">
+      <ng-container *ngIf="name.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="vf.email" [readonly]="isEdit" formControlName="email" placeholder="Enter Full Name"></ion-input>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.email">
+      <ng-container *ngIf="email.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input inputmode="numeric" [readonly]="isEdit" [(ngModel)]="vf.phoneNo" formControlName="phoneNo" placeholder="Enter Contact No"></ion-input>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.phoneNo">
+      <ng-container *ngIf="phoneNo.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Type of Visit</ion-label>
+      <ion-select placeholder="Please Select Type of Visit" [disabled]="isEdit" [(ngModel)]="vf.visit" formControlName="typeVisit" interface="action-sheet">
+        <ion-select-option value="1">Meeting</ion-select-option>
+        <ion-select-option value="2">Delivery</ion-select-option>
+        <ion-select-option value="3">Personal</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.typeVisit">
+      <ng-container *ngIf="typeVisit.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Person to Meet/Visit</ion-label>
+      <ion-input [(ngModel)]="vf.meet" [readonly]="isEdit" formControlName="meet" placeholder="Please Enter Name of Person"></ion-input>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.meet">
+      <ng-container *ngIf="meet.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Date of Entry</ion-label>
+      <ion-datetime picker-format="DD MM YYYY" readonly placeholder="Please Enter Entry Date" displayFormat="DD MMM YYYY"
+        formControlName="entryDate" [(ngModel)]="vf.entryDate"></ion-datetime>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.entryDate">
+      <ng-container *ngIf="entryDate.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Time of Entry</ion-label>
+      <ion-datetime picker-format="hh:mm a" [readonly]="isEdit" placeholder="Please Enter Entry Time" displayFormat="hh:mm a"
+        formControlName="entryTime" [(ngModel)]="vf.entryTime"></ion-datetime>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.entryTime">
+      <ng-container *ngIf="entryTime.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating">Time of Exit</ion-label>
+      <ion-datetime picker-format="hh:mm a"  placeholder="Please Enter Exit Time" displayFormat="hh:mm a"
+        formControlName="exitTime" [(ngModel)]="vf.exitTime"></ion-datetime>
+    </ion-item>
+    <div *ngFor="let error of errorMessages.exitTime">
+      <ng-container *ngIf="exitTime.hasError(error.type)">
+        <small class="serror-message">{{error.message}}</small>
+      </ng-container>
+    </div>
+    <ion-button type="submit" *ngIf="!isEdit" [disabled]="!visitorForm.valid" class="footer-btn" color="tertiary" expand="full">Add</ion-button>
+    <ion-row *ngIf="isEdit">
+      <ion-col>
+    <ion-button type="submit" *ngIf="isEdit" [disabled]="!visitorForm.valid" class="footer-btn" color="tertiary" expand="full">Update</ion-button>
+      </ion-col>
+    <!-- <ion-button *ngIf="isEdit" class="footer-btn" color="tertiary" expand="full" (click)="goBack()">Back</ion-button> -->
+      <ion-col>
+    <ion-button *ngIf="isEdit" class="footer-btn" color="tertiary" expand="full" (click)="goBack()">Back</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+
 </ion-content>
