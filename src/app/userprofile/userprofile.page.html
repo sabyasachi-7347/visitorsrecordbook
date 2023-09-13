@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+  <h1>Profile User</h1>
+</div>
+
+<div>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating">Name </ion-label>
+    <ion-input [(ngModel)]="pro.name" [readonly]="editpro == false"></ion-input>
+  </ion-item>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating">Email </ion-label>
+    <ion-input [(ngModel)]="pro.email" [readonly]="editpro == false"></ion-input>
+  </ion-item>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating">Mobile </ion-label>
+    <ion-input [(ngModel)]="pro.mobile" [readonly]="editpro == false"></ion-input>
+  </ion-item>
+  <ion-item class="ion-no-padding">
+    <ion-label position="floating">Address </ion-label>
+    <ion-input [(ngModel)]="pro.address" [readonly]="editpro == false"></ion-input>
+  </ion-item>
+</div>
+</ion-content>
